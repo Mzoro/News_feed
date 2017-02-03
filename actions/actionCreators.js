@@ -1,25 +1,26 @@
-export const updateMessage = (messageId, title, desc, time) => {
+import {
+  UPDATE_MESSAGE,
+  ADD_MESSAGE,
+  DELETE_MESSAGE
+} from '../constants/Message'
+
+export const updateMessage = (data) => {
   return {
-    type: 'UPDATE_MESSAGE',
-    messageId,
-    title,
-    desc,
-    time
+    type: UPDATE_MESSAGE,
+    data
   }
 }
 
-export const addMessage = (title, desc, time) => {
+export const addMessage = (data) => {
   return {
-    type: 'ADD_MESSAGE',
-    title,
-    desc,
-    time
+    type: ADD_MESSAGE,
+    data
   }
 }
 
 export const deleteMessage = (messageId) => {
   return {
-    type: 'DELETE_MESSAGE',
+    type: DELETE_MESSAGE,
     messageId
   }
 }

@@ -7,14 +7,19 @@ class AddMessageForm extends React.Component {
       isAppending : false
     }
   }
-  createMessage(event) {
+  handleSubmit(event) {
     event.preventDefault();
     let now = new Date()
-    this.props.addMessage(this.refs.title.value, this.refs.desc.value, now);
+    let message = {
+      title: this.refs.title.value, 
+      desc: this.refs.desc.value, 
+      time: now
+    } 
+    this.props.addMessage(message);
     this.state.isAppending = false
     this.setState({ isAppending : this.state.isAppending });  
   }
-  startAdd () {
+  handleClick () {
     this.state.isAppending = true
     this.setState({ isAppending : this.state.isAppending });  
   }
@@ -22,12 +27,12 @@ class AddMessageForm extends React.Component {
     return (
       <div>
         {this.state.isAppending 
-          ? <form ref="messageForm" onSubmit={this.createMessage.bind(this)} >
+          ? <form ref="messageForm" onSubmit={this.handleSubmit.bind(this)} >
               <button type='Submit'>Add message</button>
-              <input type='text' ref='title' placeholder="Title"/>    
-              <textarea type='text' ref='desc' placeholder="Desc"/>
+              <input type='text' ref='title' placeholder="Title" required/>    
+              <textarea type='text' ref='desc' placeholder="Desc" required/>
             </form>
-          : <button onClick={this.startAdd.bind(this)}>Add message</button>}
+          : <button onClick={this.handleClick.bind(this)}>Add message</button>}
       </div>
     )  
   }

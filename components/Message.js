@@ -4,19 +4,25 @@ class Message extends React.Component {
   constructor() {
     super();
     this.state = {
-      isEditing : -1
+      currentId : -1
     }
   }
-  completeUpdate (event) {
+  handleSubmit (event) {
     event.preventDefault();
     let now = new Date()
-    this.props.updateMessage(this.props.index, this.refs.title.value, this.refs.desc.value, now)
-    this.state.isEditing = -1
-    this.setState({ isEditing : this.state.isEditing });  
+    let message = {
+      index: this.props.index, 
+      title: this.refs.title.value, 
+      desc: this.refs.desc.value, 
+      time: now
+    } 
+    this.props.updateMessage(message)
+    this.state.currentId = -1
+    this.setState({ currentId : this.state.currentId });  
   }
-  startUpdate(){
-    this.state.isEditing = this.props.index
-    this.setState({ isEditing : this.state.isEditing });  
+  handleClick(){
+    this.state.currentId = this.props.index
+    this.setState({ currentId : this.state.currentId });  
   }
   render () {
     const { message } = this.props;
@@ -26,19 +32,19 @@ class Message extends React.Component {
     const formattedTime = now.toLocaleString("ru", optionsTime)+", "+now.toLocaleString("ru", optionsDate)
     return (
       <div>
-         {this.state.isEditing != this.props.index 
+         {this.state.currentId != this.props.index 
           ? <div>
               <h5>{message.title}</h5>
               <p>{message.desc}</p>
               <p>{formattedTime}</p>
               <button onClick={this.props.deleteMessage.bind(null, this.props.index)}>delete message</button>
-              <button onClick={this.startUpdate.bind(this)}>update</button>
+              <button onClick={this.handleClick.bind(this)}>update</button>
             </div>
           : <div>
-              <form ref="messageForm" onSubmit={this.completeUpdate.bind(this)} >
+              <form ref="messageForm" onSubmit={this.handleSubmit.bind(this)} >
                 <button type='Submit'>ok</button>
-                <input type='text' ref='title' defaultValue={message.title}/>    
-                <textarea type='text' ref='desc' defaultValue={message.desc}/>
+                <input type='text' ref='title' defaultValue={message.title} required/>    
+                <textarea type='text' ref='desc' defaultValue={message.desc} required/>
               </form>
             </div>}
       </div>

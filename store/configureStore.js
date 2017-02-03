@@ -9,10 +9,10 @@ const initialState = {
 const store = createStore(rootReducer, initialState, applyMiddleware(thunk, createLogger()))
 
 if (module.hot) {
-module.hot.accept('../reducers', () => {
-  const nextRootReducer = require('../reducers')
-  store.replaceReducer(nextRootReducer)
-})
+	module.hot.accept('../reducers', () => {
+	  const nextRootReducer = require('../reducers')
+	  store.replaceReducer(nextRootReducer)
+	})
 }
 
 export default store
