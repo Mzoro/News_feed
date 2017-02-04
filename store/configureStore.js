@@ -4,7 +4,8 @@ import createLogger from 'redux-logger'
 import thunk from 'redux-thunk'
 
 const initialState = {
-  messages:[]
+  messages:[],
+  searchedInfo: ''
 };
 const store = createStore(rootReducer, initialState, applyMiddleware(thunk, createLogger()))
 

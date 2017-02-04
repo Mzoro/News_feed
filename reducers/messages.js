@@ -2,7 +2,7 @@ import {
   UPDATE_MESSAGE,
   ADD_MESSAGE,
   DELETE_MESSAGE
-} from '../constants/Message'
+} from '../constants/Messages'
 
 const messages = (state = [], action) => {
 

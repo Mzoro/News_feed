@@ -26,12 +26,14 @@ class Message extends React.Component {
   }
   render () {
     const { message } = this.props;
+    const { searchedInfo } = this.props;
     const now = message.time;
     const optionsTime = { hour: 'numeric', minute: 'numeric' };
     const optionsDate = { year: 'numeric', month: 'numeric', day: 'numeric' };
     const formattedTime = now.toLocaleString("ru", optionsTime)+", "+now.toLocaleString("ru", optionsDate)
+    const isVisible = message.title.includes(searchedInfo) || formattedTime.includes(searchedInfo)
     return (
-      <div>
+      <div className={ isVisible ? '' : 'none' }>
          {this.state.currentId != this.props.index 
           ? <div>
               <h5>{message.title}</h5>

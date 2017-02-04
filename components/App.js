@@ -5,15 +5,19 @@ import * as actionCreators from '../actions/actionCreators'
 
 import Message from './Message';
 import AddMessageForm from './AddMessageForm';
+import SearchPanel from './SearchPanel';
+
 import { sortByTime } from '../utils/utils.js'
 
 class App extends Component {
   render() {
-    const { messages, updateMessage, addMessage, deleteMessage } = this.props
+    const { messages, searchedInfo, updateMessage, addMessage, deleteMessage, setSearchedInfo } = this.props
     return (
-      <div>  
+      <div>
+        <SearchPanel setSearchedInfo={setSearchedInfo}/>
         {sortByTime(messages)
-          .map((message, key) => <Message key={key} index={key} message={message} 
+          .map((message, key) => <Message key={key} index={key} message={message}
+                                          searchedInfo={searchedInfo} 
                                           deleteMessage={deleteMessage} 
                                           updateMessage={updateMessage}/>)}
 
@@ -25,7 +29,9 @@ class App extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    messages: state.messages
+    messages: state.messages,
+    searchedInfo: state.searchedInfo
+
   }
 }
 

@@ -1,8 +1,9 @@
 import {
   UPDATE_MESSAGE,
   ADD_MESSAGE,
-  DELETE_MESSAGE
-} from '../constants/Message'
+  DELETE_MESSAGE,
+  SET_SEARCHED_INFO
+} from '../constants/Messages'
 
 export const updateMessage = (data) => {
   return {
@@ -22,5 +23,11 @@ export const deleteMessage = (messageId) => {
   return {
     type: DELETE_MESSAGE,
     messageId
+  }
+}
+export const setSearchedInfo = (info) => {
+  return {
+    type: SET_SEARCHED_INFO,
+    info
   }
 }
